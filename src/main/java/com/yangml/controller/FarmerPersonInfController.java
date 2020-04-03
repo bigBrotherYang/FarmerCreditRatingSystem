@@ -85,7 +85,10 @@ public class FarmerPersonInfController {
             return jsonResult;
         }
         jsonResult.setMsg("OK");
-        String url = "http://localhost:8080/file/"+filename;
+        String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
+        String url = basePath+"/file/"+filename;
+//        String url = "http://localhost:8080/file/"+filename;
+//        String url = "http://localhost:8080/file/"+filename;
         FarmerBasicPicture picture = new FarmerBasicPicture();
         picture.setFbpLoanUrl(url);
         picture.setUserId(user.getUserId());
@@ -131,7 +134,9 @@ public class FarmerPersonInfController {
             return jsonResult;
         }
         jsonResult.setMsg("OK");
-        String url = "http://localhost:8080/file/"+filename;
+        String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
+        String url = basePath+"/file/"+filename;
+//        String url = "http://localhost:8080/file/"+filename;
         FarmerBasicPicture picture = new FarmerBasicPicture();
         picture.setFbpProductionUrl(url);
         picture.setUserId(user.getUserId());
