@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yangml.dao.SysLogMapper">
+  <resultMap id="BaseResultMap" type="com.yangml.pojo.SysLog">
+    <id column="LOG_ID" jdbcType="INTEGER" property="logId" />
+    <result column="OPEERATION_USER" jdbcType="VARCHAR" property="opeerationUser" />
+    <result column="OPEERATION_METHOD" jdbcType="VARCHAR" property="opeerationMethod" />
+    <result column="OPEERATION_TIME" jdbcType="TIMESTAMP" property="opeerationTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    LOG_ID, OPEERATION_USER, OPEERATION_METHOD, OPEERATION_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_LOG
+    where LOG_ID = #{logId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from SYS_LOG
+    where LOG_ID = #{logId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yangml.pojo.SysLog">
+    insert into SYS_LOG (LOG_ID, OPEERATION_USER, OPEERATION_METHOD, 
+      OPEERATION_TIME)
+    values (#{logId,jdbcType=INTEGER}, #{opeerationUser,jdbcType=VARCHAR}, #{opeerationMethod,jdbcType=VARCHAR}, 
+      #{opeerationTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yangml.pojo.SysLog">
+    insert into SYS_LOG
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="logId != null">
+        LOG_ID,
+      </if>
+      <if test="opeerationUser != null">
+        OPEERATION_USER,
+      </if>
+      <if test="opeerationMethod != null">
+        OPEERATION_METHOD,
+      </if>
+      <if test="opeerationTime != null">
+        OPEERATION_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="logId != null">
+        #{logId,jdbcType=INTEGER},
+      </if>
+      <if test="opeerationUser != null">
+        #{opeerationUser,jdbcType=VARCHAR},
+      </if>
+      <if test="opeerationMethod != null">
+        #{opeerationMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="opeerationTime != null">
+        #{opeerationTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yangml.pojo.SysLog">
+    update SYS_LOG
+    <set>
+      <if test="opeerationUser != null">
+        OPEERATION_USER = #{opeerationUser,jdbcType=VARCHAR},
+      </if>
+      <if test="opeerationMethod != null">
+        OPEERATION_METHOD = #{opeerationMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="opeerationTime != null">
+        OPEERATION_TIME = #{opeerationTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where LOG_ID = #{logId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yangml.pojo.SysLog">
+    update SYS_LOG
+    set OPEERATION_USER = #{opeerationUser,jdbcType=VARCHAR},
+      OPEERATION_METHOD = #{opeerationMethod,jdbcType=VARCHAR},
+      OPEERATION_TIME = #{opeerationTime,jdbcType=TIMESTAMP}
+    where LOG_ID = #{logId,jdbcType=INTEGER}
+  </update>
+  <select id="findAllSysLog" resultMap="BaseResultMap">
+    select * from SYS_LOG
+  </select>
+</mapper>

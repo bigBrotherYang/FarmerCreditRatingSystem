@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yangml.dao.MonthlyScoreMapper">
+  <resultMap id="BaseResultMap" type="com.yangml.pojo.MonthlyScore">
+    <id column="msof_id" jdbcType="INTEGER" property="msofId" />
+    <result column="msof_score" jdbcType="REAL" property="msofScore" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="USER_ID" jdbcType="INTEGER" property="userId" />
+    <association property="publicInf" javaType="com.yangml.pojo.FarmerPublicInf">
+      <id property="userId" column="USER_ID"></id>
+      <result property="farmerName" column="FARMER_NAME"/>
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List">
+    msof_id, msof_score, create_time, USER_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from monthly_score_of_farmers
+    where msof_id = #{msofId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from monthly_score_of_farmers
+    where msof_id = #{msofId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yangml.pojo.MonthlyScore">
+    insert into monthly_score_of_farmers (msof_id, msof_score, create_time, 
+      USER_ID)
+    values (#{msofId,jdbcType=INTEGER}, #{msofScore,jdbcType=REAL}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{userId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yangml.pojo.MonthlyScore">
+    insert into monthly_score_of_farmers
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="msofId != null">
+        msof_id,
+      </if>
+      <if test="msofScore != null">
+        msof_score,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="msofId != null">
+        #{msofId,jdbcType=INTEGER},
+      </if>
+      <if test="msofScore != null">
+        #{msofScore,jdbcType=REAL},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yangml.pojo.MonthlyScore">
+    update monthly_score_of_farmers
+    <set>
+      <if test="msofScore != null">
+        msof_score = #{msofScore,jdbcType=REAL},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where msof_id = #{msofId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yangml.pojo.MonthlyScore">
+    update monthly_score_of_farmers
+    set msof_score = #{msofScore,jdbcType=REAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      USER_ID = #{userId,jdbcType=INTEGER}
+    where msof_id = #{msofId,jdbcType=INTEGER}
+  </update>
+  <select id="findAllMonthlyScore" resultMap="BaseResultMap">
+      select *
+      from monthly_score_of_farmers msof
+      join FARMER_PUBLIC_INF fpi
+      on msof.USER_ID = fpi.USER_ID
+  </select>
+  <select id="findMonthlyScoreUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+      select *
+      from monthly_score_of_farmers
+      where USER_ID = #{userId}
+  </select>
+</mapper>

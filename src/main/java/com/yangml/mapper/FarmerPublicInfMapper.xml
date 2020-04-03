@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yangml.dao.FarmerPublicInfMapper">
+  <resultMap id="BaseResultMap" type="com.yangml.pojo.FarmerPublicInf">
+    <id column="FARMER_ID" jdbcType="INTEGER" property="farmerId" />
+    <result column="FARMER_NAME" jdbcType="VARCHAR" property="farmerName" />
+    <result column="FARMER_CARD_ID" jdbcType="VARCHAR" property="farmerCardId" />
+    <result column="FARMER_LOAD_INFO" jdbcType="VARCHAR" property="farmerLoadInfo" />
+    <result column="CREATED_TIME" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="UPDATED_TIME" jdbcType="TIMESTAMP" property="updatedTime" />
+    <result column="USER_ID" jdbcType="INTEGER" property="userId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    FARMER_ID, FARMER_NAME, FARMER_CARD_ID, FARMER_LOAD_INFO, CREATED_TIME, UPDATED_TIME, 
+    USER_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from FARMER_PUBLIC_INF
+    where FARMER_ID = #{farmerId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from FARMER_PUBLIC_INF
+    where FARMER_ID = #{farmerId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yangml.pojo.FarmerPublicInf">
+    insert into FARMER_PUBLIC_INF (FARMER_ID, FARMER_NAME, FARMER_CARD_ID, 
+      FARMER_LOAD_INFO, CREATED_TIME, UPDATED_TIME, 
+      USER_ID)
+    values (#{farmerId,jdbcType=INTEGER}, #{farmerName,jdbcType=VARCHAR}, #{farmerCardId,jdbcType=VARCHAR}, 
+      #{farmerLoadInfo,jdbcType=VARCHAR}, #{createdTime,jdbcType=TIMESTAMP}, #{updatedTime,jdbcType=TIMESTAMP}, 
+      #{userId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yangml.pojo.FarmerPublicInf">
+    insert into FARMER_PUBLIC_INF
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="farmerId != null">
+        FARMER_ID,
+      </if>
+      <if test="farmerName != null">
+        FARMER_NAME,
+      </if>
+      <if test="farmerCardId != null">
+        FARMER_CARD_ID,
+      </if>
+      <if test="farmerLoadInfo != null">
+        FARMER_LOAD_INFO,
+      </if>
+      <if test="createdTime != null">
+        CREATED_TIME,
+      </if>
+      <if test="updatedTime != null">
+        UPDATED_TIME,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="farmerId != null">
+        #{farmerId,jdbcType=INTEGER},
+      </if>
+      <if test="farmerName != null">
+        #{farmerName,jdbcType=VARCHAR},
+      </if>
+      <if test="farmerCardId != null">
+        #{farmerCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="farmerLoadInfo != null">
+        #{farmerLoadInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yangml.pojo.FarmerPublicInf">
+    update FARMER_PUBLIC_INF
+    <set>
+      <if test="farmerName != null">
+        FARMER_NAME = #{farmerName,jdbcType=VARCHAR},
+      </if>
+      <if test="farmerCardId != null">
+        FARMER_CARD_ID = #{farmerCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="farmerLoadInfo != null">
+        FARMER_LOAD_INFO = #{farmerLoadInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where FARMER_ID = #{farmerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByUserISelective" parameterType="com.yangml.pojo.FarmerPublicInf">
+    update FARMER_PUBLIC_INF
+    <set>
+      <if test="farmerName != null">
+        FARMER_NAME = #{farmerName,jdbcType=VARCHAR},
+      </if>
+      <if test="farmerCardId != null">
+        FARMER_CARD_ID = #{farmerCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="farmerLoadInfo != null">
+        FARMER_LOAD_INFO = #{farmerLoadInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yangml.pojo.FarmerPublicInf">
+    update FARMER_PUBLIC_INF
+    set FARMER_NAME = #{farmerName,jdbcType=VARCHAR},
+      FARMER_CARD_ID = #{farmerCardId,jdbcType=VARCHAR},
+      FARMER_LOAD_INFO = #{farmerLoadInfo,jdbcType=VARCHAR},
+      CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+      UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      USER_ID = #{userId,jdbcType=INTEGER}
+    where FARMER_ID = #{farmerId,jdbcType=INTEGER}
+  </update>
+
+  <delete id="deleteFarmerPublicInf" parameterType="java.lang.Integer">
+    delete from FARMER_PUBLIC_INF
+    where USER_ID = #{userId}
+  </delete>
+  <select id="findFarmerPubInfByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select * from FARMER_PUBLIC_INF where USER_ID = #{userId}
+  </select>
+  <select id="findAllFarmersInf" resultMap="BaseResultMap">
+    select * from FARMER_PUBLIC_INF
+  </select>
+</mapper>

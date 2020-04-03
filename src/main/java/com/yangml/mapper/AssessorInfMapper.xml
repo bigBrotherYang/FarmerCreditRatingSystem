@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yangml.dao.AssessorInfMapper">
+  <resultMap id="BaseResultMap" type="com.yangml.pojo.AssessorInf">
+    <id column="ASS_ID" jdbcType="INTEGER" property="assId" />
+    <result column="ASS_NAME" jdbcType="VARCHAR" property="assName" />
+    <result column="ASS_JOB_NUMBER" jdbcType="VARCHAR" property="assJobNumber" />
+    <result column="ASS_JOB" jdbcType="VARCHAR" property="assJob" />
+    <result column="CREATED_TIME" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="UPDATED_TIME" jdbcType="TIMESTAMP" property="updatedTime" />
+    <result column="USER_ID" jdbcType="INTEGER" property="userId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ASS_ID, ASS_NAME, ASS_JOB_NUMBER, ASS_JOB, CREATED_TIME, UPDATED_TIME, USER_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ASSESSOR_INF
+    where ASS_ID = #{assId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ASSESSOR_INF
+    where ASS_ID = #{assId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yangml.pojo.AssessorInf">
+    insert into ASSESSOR_INF (ASS_ID, ASS_NAME, ASS_JOB_NUMBER, 
+      ASS_JOB, CREATED_TIME, UPDATED_TIME, 
+      USER_ID)
+    values (#{assId,jdbcType=INTEGER}, #{assName,jdbcType=VARCHAR}, #{assJobNumber,jdbcType=VARCHAR}, 
+      #{assJob,jdbcType=VARCHAR}, #{createdTime,jdbcType=TIMESTAMP}, #{updatedTime,jdbcType=TIMESTAMP}, 
+      #{userId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yangml.pojo.AssessorInf">
+    insert into ASSESSOR_INF
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="assId != null">
+        ASS_ID,
+      </if>
+      <if test="assName != null">
+        ASS_NAME,
+      </if>
+      <if test="assJobNumber != null">
+        ASS_JOB_NUMBER,
+      </if>
+      <if test="assJob != null">
+        ASS_JOB,
+      </if>
+      <if test="createdTime != null">
+        CREATED_TIME,
+      </if>
+      <if test="updatedTime != null">
+        UPDATED_TIME,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="assId != null">
+        #{assId,jdbcType=INTEGER},
+      </if>
+      <if test="assName != null">
+        #{assName,jdbcType=VARCHAR},
+      </if>
+      <if test="assJobNumber != null">
+        #{assJobNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="assJob != null">
+        #{assJob,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yangml.pojo.AssessorInf">
+    update ASSESSOR_INF
+    <set>
+      <if test="assName != null">
+        ASS_NAME = #{assName,jdbcType=VARCHAR},
+      </if>
+      <if test="assJobNumber != null">
+        ASS_JOB_NUMBER = #{assJobNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="assJob != null">
+        ASS_JOB = #{assJob,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ASS_ID = #{assId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByUserIdSelective" parameterType="com.yangml.pojo.AssessorInf">
+    update ASSESSOR_INF
+    <set>
+      <if test="assName != null">
+        ASS_NAME = #{assName,jdbcType=VARCHAR},
+      </if>
+      <if test="assJobNumber != null">
+        ASS_JOB_NUMBER = #{assJobNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="assJob != null">
+        ASS_JOB = #{assJob,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yangml.pojo.AssessorInf">
+    update ASSESSOR_INF
+    set ASS_NAME = #{assName,jdbcType=VARCHAR},
+      ASS_JOB_NUMBER = #{assJobNumber,jdbcType=VARCHAR},
+      ASS_JOB = #{assJob,jdbcType=VARCHAR},
+      CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+      UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      USER_ID = #{userId,jdbcType=INTEGER}
+    where ASS_ID = #{assId,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteAssessorInfByUserId" parameterType="java.lang.Integer">
+    delete from ASSESSOR_INF
+    where USER_ID =#{userId}
+  </delete>
+  <select id="findAssessorInfByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select *
+    from ASSESSOR_INF
+    where USER_ID = #{userId}
+  </select>
+
+  <select id="findAllAssessor" resultMap="BaseResultMap">
+    select * from ASSESSOR_INF
+  </select>
+</mapper>

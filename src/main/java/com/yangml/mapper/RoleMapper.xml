@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yangml.dao.RoleMapper">
+  <resultMap id="BaseResultMap" type="com.yangml.pojo.Role">
+    <result column="ROLE_ID" jdbcType="INTEGER" property="roleId" />
+    <result column="ROLE_NAME" jdbcType="VARCHAR" property="roleName" />
+    <result column="CREATED_BY" jdbcType="VARCHAR" property="createdBy" />
+    <result column="CREATED_TIME" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="UPDATED_BY" jdbcType="VARCHAR" property="updatedBy" />
+    <result column="UPDATED_TIME" jdbcType="TIMESTAMP" property="updatedTime" />
+  </resultMap>
+
+  <insert id="insert" parameterType="com.yangml.pojo.Role">
+    insert into tbRole (ROLE_ID, ROLE_NAME, CREATED_BY, 
+      CREATED_TIME, UPDATED_BY, UPDATED_TIME
+      )
+    values (#{roleId,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, 
+      #{createdTime,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=VARCHAR}, #{updatedTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yangml.pojo.Role">
+    insert into tbRole
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        ROLE_ID,
+      </if>
+      <if test="roleName != null">
+        ROLE_NAME,
+      </if>
+      <if test="createdBy != null">
+        CREATED_BY,
+      </if>
+      <if test="createdTime != null">
+        CREATED_TIME,
+      </if>
+      <if test="updatedBy != null">
+        UPDATED_BY,
+      </if>
+      <if test="updatedTime != null">
+        UPDATED_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="roleName != null">
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null">
+        #{updatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedTime != null">
+        #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yangml.pojo.Role">
+    update tbRole
+    <set>
+      <if test="roleName!=null" >
+        ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleName!=null" >
+        CREATE_BY = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null">
+        UPDATED_BY = #{updatedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedTime != null">
+        UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    WHERE  ROLE_ID = #{roleId,jdbcType=INTEGER}
+  </update>
+  <delete id="delRoleById" >
+    delete from tbRole where ROLE_ID = #{roleId,jdbcType=INTEGER}
+  </delete>
+  <select id="checkRole" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select *
+    from tbRole
+    <where>
+        <if test="roleId!=null">
+          ROLE_ID = #{roleId,jdbcType=INTEGER}
+        </if>
+        <if test="roleName!=null">
+          AND ROLE_NAME = #{roleName,jdbcType=VARCHAR}
+        </if>
+    </where>
+  </select>
+  <select id="findAllRole" resultMap="BaseResultMap" >
+    select * from tbRole
+  </select>
+  <select id="delcheck" resultType="java.lang.Integer">
+    select ur.USER_ID
+    from tbRole r
+    join tb_user_role  ur
+    where  r.ROLE_ID = #{roleId,jdbcType=INTEGER}
+  </select>
+
+  <select id="findRoleByUserId"  resultMap="BaseResultMap">
+    select tr.*
+    from tbRole tr
+    join tb_user_role ur
+    on tr.ROLE_ID = ur.ROLE_ID
+    WHERE ur.USER_ID = #{userId}
+  </select>
+</mapper>

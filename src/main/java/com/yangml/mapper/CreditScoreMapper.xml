@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yangml.dao.CreditScoreMapper">
+  <resultMap id="BaseResultMap" type="com.yangml.pojo.CreditScore">
+    <id column="cs_id" jdbcType="INTEGER" property="csId" />
+    <result column="cs_context" jdbcType="VARCHAR" property="csContext" />
+    <result column="cs_score" jdbcType="INTEGER" property="csScore" />
+    <result column="USER_ID" jdbcType="INTEGER" property="userId" />
+  </resultMap>
+
+  <resultMap id="BaseCredit" type="com.yangml.pojo.CreditScore">
+    <id column="cs_id" jdbcType="INTEGER" property="csId" />
+    <result column="cs_context" jdbcType="VARCHAR" property="csContext" />
+    <result column="cs_score" jdbcType="INTEGER" property="csScore" />
+    <result column="cs_operator" jdbcType="INTEGER" property="csOperator" />
+    <result column="USER_ID" jdbcType="INTEGER" property="userId" />
+    <association property="publicInf" javaType="com.yangml.pojo.FarmerPublicInf">
+      <id property="userId" column="USER_ID"></id>
+      <result property="farmerName" column="FARMER_NAME"/>
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List">
+    cs_id, cs_context, cs_score, USER_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from credit_score
+    where cs_id = #{csId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from credit_score
+    where cs_id = #{csId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yangml.pojo.CreditScore">
+    insert into credit_score (cs_id, cs_context, cs_score, cs_operator,USER_ID)
+    values (#{csId,jdbcType=INTEGER}, #{csContext,jdbcType=VARCHAR}, #{csScore,jdbcType=INTEGER}, #{csOperator,jdbcType=INTEGER},#{userId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yangml.pojo.CreditScore">
+    insert into credit_score
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="csId != null">
+        cs_id,
+      </if>
+      <if test="csContext != null">
+        cs_context,
+      </if>
+      <if test="csScore != null">
+        cs_score,
+      </if>
+      <if test="csOperator != null">
+        cs_operator,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="csId != null">
+        #{csId,jdbcType=INTEGER},
+      </if>
+      <if test="csContext != null">
+        #{csContext,jdbcType=VARCHAR},
+      </if>
+      <if test="csScore != null">
+        #{csScore,jdbcType=INTEGER},
+      </if>
+      <if test="csOperator != null">
+        #{csOperator,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yangml.pojo.CreditScore">
+    update credit_score
+    <set>
+      <if test="csContext != null">
+        cs_context = #{csContext,jdbcType=VARCHAR},
+      </if>
+      <if test="csScore != null">
+        cs_score = #{csScore,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where cs_id = #{csId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yangml.pojo.CreditScore">
+    update credit_score
+    set cs_context = #{csContext,jdbcType=VARCHAR},
+      cs_score = #{csScore,jdbcType=INTEGER},
+      USER_ID = #{userId,jdbcType=INTEGER}
+    where cs_id = #{csId,jdbcType=INTEGER}
+  </update>
+  <update id="updCreditScore" parameterType="com.yangml.pojo.CreditScore">
+    update credit_score
+    set cs_context = #{csContext,jdbcType=VARCHAR},
+      cs_score = #{csScore,jdbcType=INTEGER},
+      cs_operator = #{csOperator,jdbcType=VARCHAR}
+    where cs_id = #{csId,jdbcType=INTEGER}
+  </update>
+  <select id="findAllCreditScore" resultMap="BaseCredit">
+    select *
+    from credit_score cs
+    join FARMER_PUBLIC_INF fpi
+    on cs.USER_ID = fpi.USER_ID
+  </select>
+  <select id="findCreditByCsId" resultMap="BaseCredit">
+    select *
+    from credit_score cs
+    join FARMER_PUBLIC_INF fpi
+    on cs.USER_ID = fpi.USER_ID where cs.cs_id = #{csId}
+  </select>
+  <select id="findCreditByCsUserId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select sum(cs_score)
+    from credit_score cs
+    where
+    cs.USER_ID = #{userId}
+  </select>
+</mapper>

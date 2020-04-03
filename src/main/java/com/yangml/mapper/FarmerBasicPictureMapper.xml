@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yangml.dao.FarmerBasicPictureMapper">
+  <resultMap id="BaseResultMap" type="com.yangml.pojo.FarmerBasicPicture">
+    <id column="fbp_id" jdbcType="INTEGER" property="fbpId" />
+    <result column="fbp_loan_url" jdbcType="VARCHAR" property="fbpLoanUrl" />
+    <result column="fbp_production_url" jdbcType="VARCHAR" property="fbpProductionUrl" />
+    <result column="USER_ID" jdbcType="INTEGER" property="userId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    fbp_id, fbp_loan_url, fbp_production_url, USER_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from farmer_basic_picture
+    where fbp_id = #{fbpId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from farmer_basic_picture
+    where fbp_id = #{fbpId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yangml.pojo.FarmerBasicPicture">
+    insert into farmer_basic_picture (fbp_id, fbp_loan_url, fbp_production_url, 
+      USER_ID)
+    values (#{fbpId,jdbcType=INTEGER}, #{fbpLoanUrl,jdbcType=VARCHAR}, #{fbpProductionUrl,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yangml.pojo.FarmerBasicPicture">
+    insert into farmer_basic_picture
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fbpId != null">
+        fbp_id,
+      </if>
+      <if test="fbpLoanUrl != null">
+        fbp_loan_url,
+      </if>
+      <if test="fbpProductionUrl != null">
+        fbp_production_url,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fbpId != null">
+        #{fbpId,jdbcType=INTEGER},
+      </if>
+      <if test="fbpLoanUrl != null">
+        #{fbpLoanUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="fbpProductionUrl != null">
+        #{fbpProductionUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByUserIdSelective" parameterType="com.yangml.pojo.FarmerBasicPicture">
+    update farmer_basic_picture
+    <set>
+      <if test="fbpLoanUrl != null">
+        fbp_loan_url = #{fbpLoanUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="fbpProductionUrl != null">
+        fbp_production_url = #{fbpProductionUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yangml.pojo.FarmerBasicPicture">
+    update farmer_basic_picture
+    set fbp_loan_url = #{fbpLoanUrl,jdbcType=VARCHAR},
+      fbp_production_url = #{fbpProductionUrl,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=INTEGER}
+    where fbp_id = #{fbpId,jdbcType=INTEGER}
+  </update>
+  <select id="findPictureByuserId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select *
+    from farmer_basic_picture
+    where USER_ID = #{userId}
+  </select>
+</mapper>

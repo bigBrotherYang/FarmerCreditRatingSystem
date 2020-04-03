@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yangml.dao.LoanrRecordMapper">
+  <resultMap id="BaseResultMap" type="com.yangml.pojo.LoanrRecord">
+    <id column="lr_id" jdbcType="INTEGER" property="lrId" />
+    <result column="lr_name" jdbcType="VARCHAR" property="lrName" />
+    <result column="lr_money" jdbcType="REAL" property="lrMoney" />
+    <result column="examine" jdbcType="INTEGER" property="examine" />
+    <result column="examine_context" jdbcType="VARCHAR" property="examineContext" />
+    <result column="examine_operator" jdbcType="VARCHAR" property="examineOperator" />
+    <result column="examine_loan" jdbcType="INTEGER" property="examineLoan" />
+    <result column="examine_context_loan" jdbcType="VARCHAR" property="examineContextLoan" />
+    <result column="examine_operator_loan" jdbcType="VARCHAR" property="examineOperatorLoan" />
+    <result column="USER_ID" jdbcType="INTEGER" property="userId" />
+    <association property="publicInf" javaType="com.yangml.pojo.FarmerPublicInf">
+      <id property="userId" column="USER_ID"></id>
+      <result property="farmerName" column="FARMER_NAME"/>
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List">
+    lr_id, lr_name, lr_money, examine, examine_context, examine_operator, examine_loan, 
+    examine_context_loan, examine_operator_loan, USER_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from loanrecord
+    where lr_id = #{lrId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from loanrecord
+    where lr_id = #{lrId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yangml.pojo.LoanrRecord">
+    insert into loanrecord (lr_id, lr_name, lr_money, 
+      examine, examine_context, examine_operator, 
+      examine_loan, examine_context_loan, examine_operator_loan, 
+      USER_ID)
+    values (#{lrId,jdbcType=INTEGER}, #{lrName,jdbcType=VARCHAR}, #{lrMoney,jdbcType=REAL}, 
+      #{examine,jdbcType=INTEGER}, #{examineContext,jdbcType=VARCHAR}, #{examineOperator,jdbcType=VARCHAR}, 
+      #{examineLoan,jdbcType=INTEGER}, #{examineContextLoan,jdbcType=VARCHAR}, #{examineOperatorLoan,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yangml.pojo.LoanrRecord">
+    insert into loanrecord
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="lrId != null">
+        lr_id,
+      </if>
+      <if test="lrName != null">
+        lr_name,
+      </if>
+      <if test="lrMoney != null">
+        lr_money,
+      </if>
+      <if test="examine != null">
+        examine,
+      </if>
+      <if test="examineContext != null">
+        examine_context,
+      </if>
+      <if test="examineOperator != null">
+        examine_operator,
+      </if>
+      <if test="examineLoan != null">
+        examine_loan,
+      </if>
+      <if test="examineContextLoan != null">
+        examine_context_loan,
+      </if>
+      <if test="examineOperatorLoan != null">
+        examine_operator_loan,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="lrId != null">
+        #{lrId,jdbcType=INTEGER},
+      </if>
+      <if test="lrName != null">
+        #{lrName,jdbcType=VARCHAR},
+      </if>
+      <if test="lrMoney != null">
+        #{lrMoney,jdbcType=REAL},
+      </if>
+      <if test="examine != null">
+        #{examine,jdbcType=INTEGER},
+      </if>
+      <if test="examineContext != null">
+        #{examineContext,jdbcType=VARCHAR},
+      </if>
+      <if test="examineOperator != null">
+        #{examineOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="examineLoan != null">
+        #{examineLoan,jdbcType=INTEGER},
+      </if>
+      <if test="examineContextLoan != null">
+        #{examineContextLoan,jdbcType=VARCHAR},
+      </if>
+      <if test="examineOperatorLoan != null">
+        #{examineOperatorLoan,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yangml.pojo.LoanrRecord">
+    update loanrecord
+    <set>
+      <if test="lrName != null">
+        lr_name = #{lrName,jdbcType=VARCHAR},
+      </if>
+      <if test="lrMoney != null">
+        lr_money = #{lrMoney,jdbcType=REAL},
+      </if>
+      <if test="examine != null">
+        examine = #{examine,jdbcType=INTEGER},
+      </if>
+      <if test="examineContext != null">
+        examine_context = #{examineContext,jdbcType=VARCHAR},
+      </if>
+      <if test="examineOperator != null">
+        examine_operator = #{examineOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="examineLoan != null">
+        examine_loan = #{examineLoan,jdbcType=INTEGER},
+      </if>
+      <if test="examineContextLoan != null">
+        examine_context_loan = #{examineContextLoan,jdbcType=VARCHAR},
+      </if>
+      <if test="examineOperatorLoan != null">
+        examine_operator_loan = #{examineOperatorLoan,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where lr_id = #{lrId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yangml.pojo.LoanrRecord">
+    update loanrecord
+    set lr_name = #{lrName,jdbcType=VARCHAR},
+      lr_money = #{lrMoney,jdbcType=REAL},
+      examine = #{examine,jdbcType=INTEGER},
+      examine_context = #{examineContext,jdbcType=VARCHAR},
+      examine_operator = #{examineOperator,jdbcType=VARCHAR},
+      examine_loan = #{examineLoan,jdbcType=INTEGER},
+      examine_context_loan = #{examineContextLoan,jdbcType=VARCHAR},
+      examine_operator_loan = #{examineOperatorLoan,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=INTEGER}
+    where lr_id = #{lrId,jdbcType=INTEGER}
+  </update>
+  <select id="findAllLoanrRecord" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+     select *
+     from loanrecord lc
+     join FARMER_PUBLIC_INF fb
+	 on lc.USER_ID = fb.USER_ID
+	 where lc.USER_ID =   #{userId}
+  </select>
+  <select id="findtopLoanrRecord" resultMap="BaseResultMap" >
+    select *
+    from loanrecord
+    order  by lr_id
+    desc limit 1
+  </select>
+</mapper>

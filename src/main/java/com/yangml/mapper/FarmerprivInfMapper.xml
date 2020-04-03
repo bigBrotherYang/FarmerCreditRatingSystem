@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yangml.dao.FarmerprivInfMapper">
+  <resultMap id="BaseResultMap" type="com.yangml.pojo.FarmerprivInf">
+    <id column="farp_id" jdbcType="INTEGER" property="farpId" />
+    <result column="farp_age" jdbcType="REAL" property="farpAge" />
+    <result column="farp_political_inf" jdbcType="REAL" property="farpPoliticalInf" />
+    <result column="farp_marriage_inf" jdbcType="REAL" property="farpMarriageInf" />
+    <result column="farp_culture_inf" jdbcType="REAL" property="farpCultureInf" />
+    <result column="farp_health_inf" jdbcType="REAL" property="farpHealthInf" />
+    <result column="farp_raise_inf" jdbcType="REAL" property="farpRaiseInf" />
+    <result column="farp_family_income" jdbcType="REAL" property="farpFamilyIncome" />
+    <result column="farp_vehicle" jdbcType="REAL" property="farpVehicle" />
+    <result column="farp_loan_amount" jdbcType="REAL" property="farpLoanAmount" />
+    <result column="farp_Usage" jdbcType="REAL" property="farpUsage" />
+    <result column="farp_mortgage_guarantee" jdbcType="REAL" property="farpMortgageGuarantee" />
+    <result column="farp_self_funded" jdbcType="REAL" property="farpSelfFunded" />
+    <result column="farp_business_life" jdbcType="REAL" property="farpBusinessLife" />
+    <result column="farp_industry_development" jdbcType="REAL" property="farpIndustryDevelopment" />
+    <result column="USER_ID" jdbcType="INTEGER" property="userId" />
+  </resultMap>
+
+  <resultMap id="BaseFarmerPriInf" type="com.yangml.pojo.FarmerprivInf">
+    <id column="farp_id" jdbcType="INTEGER" property="farpId" />
+    <result column="farp_age" jdbcType="REAL" property="farpAge" />
+    <result column="farp_political_inf" jdbcType="REAL" property="farpPoliticalInf" />
+    <result column="farp_marriage_inf" jdbcType="REAL" property="farpMarriageInf" />
+    <result column="farp_culture_inf" jdbcType="REAL" property="farpCultureInf" />
+    <result column="farp_health_inf" jdbcType="REAL" property="farpHealthInf" />
+    <result column="farp_raise_inf" jdbcType="REAL" property="farpRaiseInf" />
+    <result column="farp_family_income" jdbcType="REAL" property="farpFamilyIncome" />
+    <result column="farp_vehicle" jdbcType="REAL" property="farpVehicle" />
+    <result column="farp_loan_amount" jdbcType="REAL" property="farpLoanAmount" />
+    <result column="farp_Usage" jdbcType="REAL" property="farpUsage" />
+    <result column="farp_mortgage_guarantee" jdbcType="REAL" property="farpMortgageGuarantee" />
+    <result column="farp_self_funded" jdbcType="REAL" property="farpSelfFunded" />
+    <result column="farp_business_life" jdbcType="REAL" property="farpBusinessLife" />
+    <result column="farp_industry_development" jdbcType="REAL" property="farpIndustryDevelopment" />
+    <result column="USER_ID" jdbcType="INTEGER" property="userId" />
+    <result column="examine" jdbcType="INTEGER" property="examine" />
+    <result column="examine_context" jdbcType="VARCHAR" property="examineContext" />
+    <result column="examine_operator" jdbcType="VARCHAR" property="examineOperator" />
+    <result column="examine_loan" jdbcType="INTEGER" property="examineLoan" />
+    <result column="examine_context_loan" jdbcType="VARCHAR" property="examineContextLoan" />
+    <result column="examine_operator_loan" jdbcType="VARCHAR" property="examineOperatorLoan" />
+    <association property="publicInf" javaType="com.yangml.pojo.FarmerPublicInf">
+        <id property="userId" column="USER_ID"></id>
+        <result property="farmerName" column="FARMER_NAME"/>
+    </association>
+  </resultMap>
+
+  <resultMap id="BaseTotalLoan" type="com.yangml.pojo.FarmerprivInf">
+    <id column="farp_id" jdbcType="INTEGER" property="farpId" />
+    <result column="sumScore" jdbcType="VARCHAR" property="totalCreditScore" />
+    <result column="farp_age" jdbcType="REAL" property="farpAge" />
+    <result column="farp_political_inf" jdbcType="REAL" property="farpPoliticalInf" />
+    <result column="farp_marriage_inf" jdbcType="REAL" property="farpMarriageInf" />
+    <result column="farp_culture_inf" jdbcType="REAL" property="farpCultureInf" />
+    <result column="farp_health_inf" jdbcType="REAL" property="farpHealthInf" />
+    <result column="farp_raise_inf" jdbcType="REAL" property="farpRaiseInf" />
+    <result column="farp_family_income" jdbcType="REAL" property="farpFamilyIncome" />
+    <result column="farp_vehicle" jdbcType="REAL" property="farpVehicle" />
+    <result column="farp_loan_amount" jdbcType="REAL" property="farpLoanAmount" />
+    <result column="farp_Usage" jdbcType="REAL" property="farpUsage" />
+    <result column="farp_mortgage_guarantee" jdbcType="REAL" property="farpMortgageGuarantee" />
+    <result column="farp_self_funded" jdbcType="REAL" property="farpSelfFunded" />
+    <result column="farp_business_life" jdbcType="REAL" property="farpBusinessLife" />
+    <result column="farp_industry_development" jdbcType="REAL" property="farpIndustryDevelopment" />
+    <result column="USER_ID" jdbcType="INTEGER" property="userId" />
+    <result column="examine" jdbcType="INTEGER" property="examine" />
+    <result column="examine_context" jdbcType="VARCHAR" property="examineContext" />
+    <result column="examine_operator" jdbcType="VARCHAR" property="examineOperator" />
+    <result column="examine_loan" jdbcType="INTEGER" property="examineLoan" />
+    <result column="examine_context_loan" jdbcType="VARCHAR" property="examineContextLoan" />
+    <result column="examine_operator_loan" jdbcType="VARCHAR" property="examineOperatorLoan" />
+    <association property="publicInf" javaType="com.yangml.pojo.FarmerPublicInf">
+      <id property="userId" column="USER_ID"></id>
+      <result property="farmerName" column="FARMER_NAME"/>
+    </association>
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    farp_id, farp_age, farp_political_inf, farp_marriage_inf, farp_culture_inf, farp_health_inf, 
+    farp_raise_inf, farp_family_income, farp_vehicle, farp_loan_amount, farp_Usage, farp_mortgage_guarantee, 
+    farp_self_funded, farp_business_life, farp_industry_development, USER_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbfarmerprivInf
+    where farp_id = #{farpId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbfarmerprivInf
+    where farp_id = #{farpId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByUserId" parameterType="java.lang.Integer">
+    delete from tbfarmerprivInf
+    where USER_ID = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yangml.pojo.FarmerprivInf">
+    insert into tbfarmerprivInf (farp_id, farp_age, farp_political_inf, 
+      farp_marriage_inf, farp_culture_inf, farp_health_inf, 
+      farp_raise_inf, farp_family_income, farp_vehicle, 
+      farp_loan_amount, farp_Usage, farp_mortgage_guarantee, 
+      farp_self_funded, farp_business_life, farp_industry_development, 
+      USER_ID)
+    values (#{farpId,jdbcType=INTEGER}, #{farpAge,jdbcType=REAL}, #{farpPoliticalInf,jdbcType=REAL}, 
+      #{farpMarriageInf,jdbcType=REAL}, #{farpCultureInf,jdbcType=REAL}, #{farpHealthInf,jdbcType=REAL}, 
+      #{farpRaiseInf,jdbcType=REAL}, #{farpFamilyIncome,jdbcType=REAL}, #{farpVehicle,jdbcType=REAL}, 
+      #{farpLoanAmount,jdbcType=REAL}, #{farpUsage,jdbcType=REAL}, #{farpMortgageGuarantee,jdbcType=REAL}, 
+      #{farpSelfFunded,jdbcType=REAL}, #{farpBusinessLife,jdbcType=REAL}, #{farpIndustryDevelopment,jdbcType=REAL}, 
+      #{userId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yangml.pojo.FarmerprivInf">
+    insert into tbfarmerprivInf
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="farpId != null">
+        farp_id,
+      </if>
+      <if test="farpAge != null">
+        farp_age,
+      </if>
+      <if test="farpPoliticalInf != null">
+        farp_political_inf,
+      </if>
+      <if test="farpMarriageInf != null">
+        farp_marriage_inf,
+      </if>
+      <if test="farpCultureInf != null">
+        farp_culture_inf,
+      </if>
+      <if test="farpHealthInf != null">
+        farp_health_inf,
+      </if>
+      <if test="farpRaiseInf != null">
+        farp_raise_inf,
+      </if>
+      <if test="farpFamilyIncome != null">
+        farp_family_income,
+      </if>
+      <if test="farpVehicle != null">
+        farp_vehicle,
+      </if>
+      <if test="farpLoanAmount != null">
+        farp_loan_amount,
+      </if>
+      <if test="farpUsage != null">
+        farp_Usage,
+      </if>
+      <if test="farpMortgageGuarantee != null">
+        farp_mortgage_guarantee,
+      </if>
+      <if test="farpSelfFunded != null">
+        farp_self_funded,
+      </if>
+      <if test="farpBusinessLife != null">
+        farp_business_life,
+      </if>
+      <if test="farpIndustryDevelopment != null">
+        farp_industry_development,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="farpId != null">
+        #{farpId,jdbcType=INTEGER},
+      </if>
+      <if test="farpAge != null">
+        #{farpAge,jdbcType=REAL},
+      </if>
+      <if test="farpPoliticalInf != null">
+        #{farpPoliticalInf,jdbcType=REAL},
+      </if>
+      <if test="farpMarriageInf != null">
+        #{farpMarriageInf,jdbcType=REAL},
+      </if>
+      <if test="farpCultureInf != null">
+        #{farpCultureInf,jdbcType=REAL},
+      </if>
+      <if test="farpHealthInf != null">
+        #{farpHealthInf,jdbcType=REAL},
+      </if>
+      <if test="farpRaiseInf != null">
+        #{farpRaiseInf,jdbcType=REAL},
+      </if>
+      <if test="farpFamilyIncome != null">
+        #{farpFamilyIncome,jdbcType=REAL},
+      </if>
+      <if test="farpVehicle != null">
+        #{farpVehicle,jdbcType=REAL},
+      </if>
+      <if test="farpLoanAmount != null">
+        #{farpLoanAmount,jdbcType=REAL},
+      </if>
+      <if test="farpUsage != null">
+        #{farpUsage,jdbcType=REAL},
+      </if>
+      <if test="farpMortgageGuarantee != null">
+        #{farpMortgageGuarantee,jdbcType=REAL},
+      </if>
+      <if test="farpSelfFunded != null">
+        #{farpSelfFunded,jdbcType=REAL},
+      </if>
+      <if test="farpBusinessLife != null">
+        #{farpBusinessLife,jdbcType=REAL},
+      </if>
+      <if test="farpIndustryDevelopment != null">
+        #{farpIndustryDevelopment,jdbcType=REAL},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yangml.pojo.FarmerprivInf">
+    update tbfarmerprivInf
+    <set>
+      <if test="farpAge != null">
+        farp_age = #{farpAge,jdbcType=REAL},
+      </if>
+      <if test="farpPoliticalInf != null">
+        farp_political_inf = #{farpPoliticalInf,jdbcType=REAL},
+      </if>
+      <if test="farpMarriageInf != null">
+        farp_marriage_inf = #{farpMarriageInf,jdbcType=REAL},
+      </if>
+      <if test="farpCultureInf != null">
+        farp_culture_inf = #{farpCultureInf,jdbcType=REAL},
+      </if>
+      <if test="farpHealthInf != null">
+        farp_health_inf = #{farpHealthInf,jdbcType=REAL},
+      </if>
+      <if test="farpRaiseInf != null">
+        farp_raise_inf = #{farpRaiseInf,jdbcType=REAL},
+      </if>
+      <if test="farpFamilyIncome != null">
+        farp_family_income = #{farpFamilyIncome,jdbcType=REAL},
+      </if>
+      <if test="farpVehicle != null">
+        farp_vehicle = #{farpVehicle,jdbcType=REAL},
+      </if>
+      <if test="farpLoanAmount != null">
+        farp_loan_amount = #{farpLoanAmount,jdbcType=REAL},
+      </if>
+      <if test="farpUsage != null">
+        farp_Usage = #{farpUsage,jdbcType=REAL},
+      </if>
+      <if test="farpMortgageGuarantee != null">
+        farp_mortgage_guarantee = #{farpMortgageGuarantee,jdbcType=REAL},
+      </if>
+      <if test="farpSelfFunded != null">
+        farp_self_funded = #{farpSelfFunded,jdbcType=REAL},
+      </if>
+      <if test="farpBusinessLife != null">
+        farp_business_life = #{farpBusinessLife,jdbcType=REAL},
+      </if>
+      <if test="farpIndustryDevelopment != null">
+        farp_industry_development = #{farpIndustryDevelopment,jdbcType=REAL},
+      </if>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where farp_id = #{farpId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yangml.pojo.FarmerprivInf">
+    update tbfarmerprivInf
+    set farp_age = #{farpAge,jdbcType=REAL},
+      farp_political_inf = #{farpPoliticalInf,jdbcType=REAL},
+      farp_marriage_inf = #{farpMarriageInf,jdbcType=REAL},
+      farp_culture_inf = #{farpCultureInf,jdbcType=REAL},
+      farp_health_inf = #{farpHealthInf,jdbcType=REAL},
+      farp_raise_inf = #{farpRaiseInf,jdbcType=REAL},
+      farp_family_income = #{farpFamilyIncome,jdbcType=REAL},
+      farp_vehicle = #{farpVehicle,jdbcType=REAL},
+      farp_loan_amount = #{farpLoanAmount,jdbcType=REAL},
+      farp_Usage = #{farpUsage,jdbcType=REAL},
+      farp_mortgage_guarantee = #{farpMortgageGuarantee,jdbcType=REAL},
+      farp_self_funded = #{farpSelfFunded,jdbcType=REAL},
+      farp_business_life = #{farpBusinessLife,jdbcType=REAL},
+      farp_industry_development = #{farpIndustryDevelopment,jdbcType=REAL},
+      USER_ID = #{userId,jdbcType=INTEGER}
+    where farp_id = #{farpId,jdbcType=INTEGER}
+  </update>
+  <select id="findFarmerinInfByUserId" parameterType="java.lang.Integer" resultMap="BaseTotalLoan">
+    select * from tbfarmerprivInf where USER_ID = #{userId};
+  </select>
+
+  <select id="findAllFarmerInf" resultMap="BaseFarmerPriInf" >
+        select *
+        from tbfarmerprivInf pri
+        join FARMER_PUBLIC_INF pub
+        on pri.USER_ID = pub.USER_ID
+  </select>
+
+  <update id="updateExamine" parameterType="com.yangml.pojo.FarmerprivInf">
+    update  tbfarmerprivInf
+    <set>
+      <if test="examine != null">
+        examine = #{examine,jdbcType=INTEGER},
+      </if>
+      <if test="examineContext != null">
+        examine_context = #{examineContext,jdbcType=VARCHAR},
+      </if>
+      <if test="examineOperator != null">
+        examine_operator = #{examineOperator,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=INTEGER};
+  </update>
+
+  <select id="findAllLoanFarmer" resultMap="BaseTotalLoan">
+         SELECT tfi.* ,fpi.farmer_name ,t.sumScore
+         from tbfarmerprivInf tfi
+         join FARMER_PUBLIC_INF fpi
+         on tfi.USER_ID = fpi.USER_ID
+         join  (select cs.USER_ID,SUM(cs.cs_SCORE) sumScore from credit_score cs group by cs.user_id) t
+         on tfi.USER_ID = t.USER_ID where tfi.examine =1
+         and farp_loan_amount is not null
+  </select>
+  <select id="findApprovalLoanInfByFarpId" parameterType="java.lang.Integer" resultMap="BaseTotalLoan">
+         SELECT tfi.* ,fpi.farmer_name ,t.sumScore
+         from tbfarmerprivInf tfi
+         join FARMER_PUBLIC_INF fpi
+         on tfi.USER_ID = fpi.USER_ID
+         join  (select cs.USER_ID,SUM(cs.cs_SCORE) sumScore from credit_score cs group by cs.user_id) t
+         on tfi.USER_ID = t.USER_ID
+         where tfi.examine =1
+         and tfi.farp_id = #{farpId}
+  </select>
+
+  <update id="updApprovalLoanInf" parameterType="com.yangml.pojo.FarmerprivInf">
+    update tbfarmerprivInf
+    set examine_loan = #{examineLoan},
+    examine_context_loan= #{examineContextLoan},
+    examine_operator_loan=#{examineOperatorLoan}
+    where farp_id = #{farpId}
+  </update>
+  <select id="findFaremTotalScore" resultMap="BaseTotalLoan">
+        SELECT tfi.*  ,t.sumScore
+         from tbfarmerprivInf tfi
+         join  (select cs.USER_ID,SUM(cs.cs_SCORE) sumScore from credit_score cs group by cs.user_id) t
+         on tfi.USER_ID = t.USER_ID
+  </select>
+  <update id="uploadMoney" parameterType="java.util.Map">
+        update tbfarmerprivInf
+        set farp_loan_amount = #{money},
+            examine = #{examine},
+            examine_context = #{examineContext},
+            examine_operator = #{examineOperator},
+            examine_loan = #{examineLoan},
+            examine_context_loan = #{examineContextLoan},
+            examine_operator_loan = #{examineOperatorLoan}
+        where USER_ID = #{userId}
+  </update>
+
+</mapper>

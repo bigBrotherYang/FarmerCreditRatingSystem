@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yangml.dao.SystemNoticeMapper">
+  <resultMap id="BaseResultMap" type="com.yangml.pojo.SystemNotice">
+    <id column="sn_id" jdbcType="INTEGER" property="snId" />
+    <result column="sn_notice" jdbcType="VARCHAR" property="snNotice" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    sn_id, sn_notice, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from system_notice
+    where sn_id = #{snId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from system_notice
+    where sn_id = #{snId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yangml.pojo.SystemNotice">
+    insert into system_notice (sn_id, sn_notice, create_time
+      )
+    values (#{snId,jdbcType=INTEGER}, #{snNotice,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yangml.pojo.SystemNotice">
+    insert into system_notice
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="snId != null">
+        sn_id,
+      </if>
+      <if test="snNotice != null">
+        sn_notice,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="snId != null">
+        #{snId,jdbcType=INTEGER},
+      </if>
+      <if test="snNotice != null">
+        #{snNotice,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yangml.pojo.SystemNotice">
+    update system_notice
+    <set>
+      <if test="snNotice != null">
+        sn_notice = #{snNotice,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where sn_id = #{snId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yangml.pojo.SystemNotice">
+    update system_notice
+    set sn_notice = #{snNotice,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where sn_id = #{snId,jdbcType=INTEGER}
+  </update>
+  <select id="topNotic"  resultMap="BaseResultMap">
+    select  * from  system_notice order by sn_id desc  limit 1
+  </select>
+  <select id="noticList"  resultMap="BaseResultMap">
+    select * from system_notice
+  </select>
+</mapper>
