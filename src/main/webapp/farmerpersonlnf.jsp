@@ -73,7 +73,7 @@
                 <input type="radio" name="farpCultureInf" value="2.5">中专/职高
             </label>
             <label>
-                <input type="radio" checked="checked" name="farpCultureInf" value="4">大专以上
+                <input type="radio" checked="checked" name="farpCultureInf" value="3">大专以上
             </label>
         </div>
         <div class="radio">
@@ -274,19 +274,106 @@
                         $("#tab-context").attr("style","display:block;");
                     }
                     $("#tab-age").text(m.farpAge);
-                    $("#tab-political").text(m.farpPoliticalInf);
-                    $("#tab-marriage").text(m.farpMarriageInf);
-                    $("#tab-culture").text(m.farpCultureInf);
-                    $("#tab-health").text(m.farpHealthInf);
+                    if(m.farpPoliticalInf==1){
+                        $("#tab-political").text("非党员");
+                    }else{
+                        $("#tab-political").text("党员");
+                    }
+                    if(m.farpMarriageInf==1){
+                        $("#tab-marriage").text("已婚");
+                    }else{
+                        $("#tab-marriage").text("未婚");
+                    }
+
+                    if (m.farpCultureInf==0.5){
+                        $("#tab-culture").text("文盲");
+                    }
+
+                    if (m.farpCultureInf==1){
+                        $("#tab-culture").text("小学");
+                    }
+                    if (m.farpCultureInf==1.5){
+                        $("#tab-culture").text("初中");
+                    }
+                    if (m.farpCultureInf==2){
+                        $("#tab-culture").text("高中");
+                    }
+                    if (m.farpCultureInf==2.5){
+                        $("#tab-culture").text("中职/职高");
+                    }
+                    if (m.farpCultureInf==3){
+                        $("#tab-culture").text("大专及其以上");
+                    }
+
+                    if (m.farpHealthInf==5){
+                        $("#tab-health").text("健康有劳动力");
+                    }
+                    if (m.farpHealthInf==3){
+                        $("#tab-health").text("身体一般劳动力下降");
+                    }
+                    if (m.farpHealthInf==1){
+                        $("#tab-health").text("身体有疾病不能劳动");
+                    }
+
                     // $("#tab-raise").text(m.farpRaiseInf);
                     $("#tab-family-income").text(m.farpFamilyIncome);
-                    $("#tab-vehicle").text(m.farpVehicle);
+                    if(m.farpVehicle==9){
+                        $("#tab-vehicle").text("有机动车");
+                    }else{
+                        $("#tab-vehicle").text("无机动车");
+                    }
                     $("#tab-loan-amount").text(m.farpLoanAmount);
-                    $("#tab-usage").text(m.farpUsage);
-                    $("#tab-mortgage-guarantee").text(m.farpMortgageGuarantee);
-                    $("#tab-self-funded").text(m.farpSelfFunded);
-                    $("#tab-business-life").text(m.farpBusinessLife);
-                    $("#tab-industry-development").text(m.farpIndustryDevelopment);
+                    if (m.farpUsage==6){
+                        $("#tab-usage").text("生产途径");
+                    }else{
+                        $("#tab-usage").text("非生产途径");
+                    }
+                    if (m.farpMortgageGuarantee==8){
+
+                        $("#tab-mortgage-guarantee").text("有抵押担保");
+                    }else{
+                        $("#tab-mortgage-guarantee").text("无抵押担保");
+
+                    }
+                    if (m.farpSelfFunded==7){
+                        $("#tab-self-funded").text("70%");
+                    }
+                    if (m.farpSelfFunded==5){
+                        $("#tab-self-funded").text("50%~70%");
+                    }
+                    if (m.farpSelfFunded==3){
+                        $("#tab-self-funded").text("30%~50%");
+                    }
+                    if (m.farpSelfFunded==2){
+                        $("#tab-self-funded").text("30%以下");
+                    }
+
+                    if (m.farpBusinessLife==2){
+                        $("#tab-business-life").text("一年以内");
+                    }
+                    if (m.farpBusinessLife==3){
+                        $("#tab-business-life").text("一至三年");
+                    }
+                    if (m.farpBusinessLife==4){
+                        $("#tab-business-life").text("三至五年");
+                    }
+                    if (m.farpBusinessLife==5){
+                        $("#tab-business-life").text("五年以上");
+                    }
+
+                    if (m.farpIndustryDevelopment==2){
+                        $("#tab-industry-development").text("非常好");
+                    }
+                    if (m.farpIndustryDevelopment==1.6){
+                        $("#tab-industry-development").text("好");
+                    }
+                    if (m.farpIndustryDevelopment==1.2){
+                        $("#tab-industry-development").text("一般");
+                    }
+                    if (m.farpIndustryDevelopment==0.8){
+                        $("#tab-industry-development").text("非常不好");
+                    }
+
                     // alert("保存成功");
                     // $("#priPersonForm").reset();
                 }
